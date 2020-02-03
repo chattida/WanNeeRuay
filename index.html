@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-title" content="วันนี้รวย | WanNeeRuay">
+    <meta name="theme-color" content="#dc3546">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="./images/icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./images/icons/icon-128x128.png">
+    <title>วันนี้รวย | WanNeeRuay</title>
+    <meta name="description"
+        content="วันนี้รวย WanNeeRuay เว็บสุ่มเลขหวย สุ่มสลากกินแบ่ง สุ่มเลขท้าย สุ่มเลขหน้า 2ตัว 3ตัว รางวัลที่1">
+    <link rel="icon" type="image/png" href="./images/icons/icon-128x128.png" />
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Niramit&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Niramit', sans-serif;
+        }
+
+        .motd {
+            font-size: 0.6em;
+        }
+
+        .text-lucky {
+            letter-spacing: 5px;
+        }
+
+        .text-lotto {
+            letter-spacing: 10px;
+            font-weight: bold;
+        }
+
+        .text-red {
+            color: red
+        }
+    </style>
+</head>
+
+<body class="bg-warning">
+    <!-- navbar -->
+    <nav class="navbar navbar-light bg-danger">
+        <a class="navbar-brand text-white" href="#">
+            วันนี้รวย 😜
+        </a>
+    </nav>
+
+    <!-- container -->
+    <div class="container-fluid">
+        <!-- motd -->
+        <p class="motd my-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งจิตให้สงบเป็นสมาธิ
+            หายใจเข้า-ออกลึกๆ
+            สัก 1-2 นาที
+            แล้วให้อธิษฐานระลึกถึงสิ่งศักดิ์สิทธิ์ทั้งหลาย ขอบารมีท่านช่วยดลบันดาลเปิดดวงโชคลาภ
+            บอกใบ้เลขเด็ดเลขนำโชค ให้มีโชคลาภในวันหวยออกด้วยเทอญ เพี้ยง!</p>
+        <!-- button -->
+        <div class="row my-3 px-2">
+            <div class="col-12 mb-2">
+                <button type="button" class="btn btn-block btn-danger mr-1" onclick="randomSix()">รางวัลที่ 1</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button type="button" class="btn btn-block btn-danger mr-1" onclick="randomThree('front')">เลขหน้า 3
+                    ตัว</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button type="button" class="btn btn-block btn-danger mr-1" onclick="randomThree('back')">เลขท้าย 3
+                    ตัว</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button type="button" class="btn btn-block btn-danger mr-1" onclick="randomTwo('front')">เลขหน้า 2
+                    ตัว</button>
+            </div>
+            <div class="col-6 mb-2">
+                <button type="button" class="btn btn-block btn-danger mr-1" onclick="randomTwo('back')">เลขท้าย 2
+                    ตัว</button>
+            </div>
+        </div>
+
+        <!-- display -->
+        <div class="row mt-5 px-2">
+            <div class="col-12 mb-2">
+                <div class="text-center" id="money">
+                    <img class="text-center" src="./images/money.gif" alt="pay money" height="155" width="155">
+                </div>
+                <h2 class="text-center text-lucky" id="lucky"></h2>
+                <h5 class="text-center" id="lottoType"></h5>
+                <h1 class="text-center text-lotto text-red" id="lottoNumber"></h1>
+                <h5 class="text-center my-5">ไม่รวยวันนี้...ก็รวยวันหน้า สาธุ ~</h5>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script>
+        function randomSix() {
+            money.style.display = "none"
+            let random = (Math.floor(Math.random() * 1000000)) % 10000000000;
+            lucky.innerText = "ขอให้โชคดี"
+            lottoType.innerText = "รางวัลที่ 1"
+            lottoNumber.innerText = checkDigit(random, "six")
+        }
+
+        function randomThree(type) {
+            money.style.display = "none"
+            let random = (Math.floor(Math.random() * 100000)) % 1000;
+            lucky.innerText = "ขอให้โชคดี"
+            if (type == "front") {
+                lottoType.innerText = "เลขหน้า 3 ตัว"
+            } else if (type == "back") {
+                lottoType.innerText = "เลขท้าย 3 ตัว"
+            }
+            lottoNumber.innerText = checkDigit(random, "three")
+        }
+
+        function randomTwo(type) {
+            money.style.display = "none"
+            let random = (Math.floor(Math.random() * 100000)) % 100;
+            lucky.innerText = "ขอให้โชคดี"
+            if (type == "front") {
+                lottoType.innerText = "เลขหน้า 2 ตัว"
+            } else if (type == "back") {
+                lottoType.innerText = "เลขท้าย 2 ตัว"
+            }
+            lottoNumber.innerText = checkDigit(random, "two")
+        }
+
+        function checkDigit(value, type) {
+            let text = "" + value
+            if (type == "six") {
+                text = ("0".repeat(6 - text.length)) + text
+            } else if (type == "three") {
+                text = ("0".repeat(3 - text.length)) + text
+            } else if (type == "two") {
+                text = ("0".repeat(2 - text.length)) + text
+            }
+            return text
+        }
+    </script>
+</body>
+
+</html>
