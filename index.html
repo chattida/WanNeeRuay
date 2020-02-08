@@ -89,6 +89,14 @@
         .text-red {
             color: red;
         }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 
@@ -149,6 +157,8 @@
                 <h5 class="text-center" id="lottoType"></h5>
                 <h1 class="text-center text-lotto text-red" id="lottoNumber"></h1>
                 <h5 class="text-center my-5">ไม่รวยวันนี้...ก็รวยวันหน้า สาธุ ~</h5>
+                <button type="button" class="btn btn-lg btn-block btn-success" id="home" style="display: none;"
+                    onclick="reset()">หน้าแรก</button>
             </div>
         </div>
     </div>
@@ -159,47 +169,81 @@
 
     <script>
         function randomSix() {
-            money.style.display = "none";
-            let random = Math.floor(Math.random() * 1000000) % 10000000000;
-            lucky.innerText = "ขอให้โชคดี";
-            lottoType.innerText = "รางวัลที่ 1";
-            lottoNumber.innerText = checkDigit(random, "six");
+            home.style.display = "block"
+            money.style.display = "none"
+            lucky.innerText = "ขอให้โชคดี"
+            lottoType.innerText = "รางวัลที่ 1"
+            shuffle("six")
         }
 
         function randomThree(type) {
-            money.style.display = "none";
-            let random = Math.floor(Math.random() * 100000) % 1000;
-            lucky.innerText = "ขอให้โชคดี";
+            home.style.display = "block"
+            money.style.display = "none"
+            lucky.innerText = "ขอให้โชคดี"
             if (type == "front") {
-                lottoType.innerText = "เลขหน้า 3 ตัว";
+                lottoType.innerText = "เลขหน้า 3 ตัว"
             } else if (type == "back") {
-                lottoType.innerText = "เลขท้าย 3 ตัว";
+                lottoType.innerText = "เลขท้าย 3 ตัว"
             }
-            lottoNumber.innerText = checkDigit(random, "three");
+            shuffle("three")
         }
 
         function randomTwo(type) {
-            money.style.display = "none";
-            let random = Math.floor(Math.random() * 100000) % 100;
-            lucky.innerText = "ขอให้โชคดี";
+            home.style.display = "block"
+            money.style.display = "none"
+            lucky.innerText = "ขอให้โชคดี"
             if (type == "front") {
-                lottoType.innerText = "เลขหน้า 2 ตัว";
+                lottoType.innerText = "เลขหน้า 2 ตัว"
             } else if (type == "back") {
-                lottoType.innerText = "เลขท้าย 2 ตัว";
+                lottoType.innerText = "เลขท้าย 2 ตัว"
             }
-            lottoNumber.innerText = checkDigit(random, "two");
+            shuffle("two")
         }
 
         function checkDigit(value, type) {
-            let text = "" + value;
+            let text = "" + value
             if (type == "six") {
-                text = "0".repeat(6 - text.length) + text;
+                text = "0".repeat(6 - text.length) + text
             } else if (type == "three") {
-                text = "0".repeat(3 - text.length) + text;
+                text = "0".repeat(3 - text.length) + text
             } else if (type == "two") {
-                text = "0".repeat(2 - text.length) + text;
+                text = "0".repeat(2 - text.length) + text
             }
-            return text;
+            return text
+        }
+
+        function reset() {
+            lucky.innerText = ""
+            lottoType.innerText = ""
+            lottoNumber.innerText = ""
+            money.style.display = "block"
+            home.style.display = "none"
+        }
+
+        async function shuffle(type) {
+            if (type == "six") {
+                for (i = 0; i < 5; i++) {
+                    let random = Math.floor(Math.random() * 1000000) % 10000000000
+                    lottoNumber.innerText = checkDigit(random, "six")
+                    await sleep(70);
+                }
+            } else if (type == "three") {
+                for (i = 0; i < 5; i++) {
+                    let random = Math.floor(Math.random() * 100000) % 1000
+                    lottoNumber.innerText = checkDigit(random, "three")
+                    await sleep(70);
+                }
+            } else if (type == "two") {
+                for (i = 0; i < 5; i++) {
+                    let random = Math.floor(Math.random() * 100000) % 100
+                    lottoNumber.innerText = checkDigit(random, "two")
+                    await sleep(70);
+                }
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms))
         }
     </script>
 </body>
